@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users & Permissions | Super Ittefaq Logistics</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="assets/style.css" rel="stylesheet">
+
+</head>
+<body>
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <img src="logo.png" alt="Super Ittefaq Logistics">
+    <div class="brand">SUPER ITTEFAQ<span>LOGISTICS &amp; TRANSPORT</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard </a>
+    <div class="nav-section-label">Operations</div>
+    <a href="jobs.html" class="nav-link"><i class="bi bi-clipboard2-check"></i> Jobs / Bookings <span class="badge-mini">12</span></a>
+    <a href="dispatch.html" class="nav-link"><i class="bi bi-diagram-3"></i> Planning / Dispatch </a>
+    <a href="trips.html" class="nav-link"><i class="bi bi-signpost-split"></i> Trips </a>
+    <a href="tracking.html" class="nav-link"><i class="bi bi-geo-alt"></i> Live Tracking </a>
+    <a href="pod.html" class="nav-link"><i class="bi bi-file-earmark-check"></i> Proof of Delivery </a>
+    <div class="nav-section-label">Fleet & People</div>
+    <a href="vehicles.html" class="nav-link"><i class="bi bi-truck-front"></i> Vehicles / Fleet </a>
+    <a href="drivers.html" class="nav-link"><i class="bi bi-person-badge"></i> Drivers </a>
+    <a href="maintenance.html" class="nav-link"><i class="bi bi-tools"></i> Maintenance </a>
+    <div class="nav-section-label">Accounts</div>
+    <a href="customers.html" class="nav-link"><i class="bi bi-people"></i> Customers </a>
+    <a href="invoices.html" class="nav-link"><i class="bi bi-receipt"></i> Invoices </a>
+    <a href="expenses.html" class="nav-link"><i class="bi bi-cash-coin"></i> Expenses </a>
+    <div class="nav-section-label">System</div>
+    <a href="documents.html" class="nav-link"><i class="bi bi-folder2-open"></i> Documents <span class="badge-mini">5</span></a>
+    <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> Reports </a>
+    <a href="users.html" class="nav-link active"><i class="bi bi-shield-lock"></i> Users & Permissions </a>
+    <a href="notifications.html" class="nav-link"><i class="bi bi-bell"></i> Notifications </a>
+    <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings </a>
+  </nav>
+  <div class="sidebar-foot">
+    Transport Management System<br>v1.0 &middot; Laravel 11
+  </div>
+</aside>
+<div id="main">
+<div id="topbar">
+    <button class="btn btn-sm d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="search">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Search users & permissions...">
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="topbar-icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></button>
+      <button class="topbar-icon-btn"><i class="bi bi-envelope"></i></button>
+      <div class="user-chip">
+        <div class="avatar">SI</div>
+        <div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--navy-900);">Admin User</div>
+          <div style="font-size:10.5px;color:var(--muted);">Administrator</div>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:11px;color:var(--muted);"></i>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">System</div>
+        <h1>Users & Permissions</h1>
+        <div class="sub">Admin, Dispatcher, Accounts, Driver & Manager roles</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-navy"><i class="bi bi-download me-1"></i> Export</button>
+        <button class="btn btn-navy"><i class="bi bi-plus-lg me-1"></i> Add User</button>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF0FB;color:var(--navy-800);"><i class="bi bi-shield-lock"></i></div>
+          <div class="label">Total Users</div>
+          <div class="value">31</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> 5 roles</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-person-check"></i></div>
+          <div class="label">Active</div>
+          <div class="value">28</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> 90% active</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FBE9E7;color:var(--danger);"><i class="bi bi-person-x"></i></div>
+          <div class="label">Suspended</div>
+          <div class="value">3</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> Review access</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#F3E3B8;color:#8A6512;"><i class="bi bi-key"></i></div>
+          <div class="label">Admins</div>
+          <div class="value">4</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> Full system access</div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+      <span class="badge-status badge-pending" style="cursor:pointer;">All</span> <span class="badge-status badge-pending" style="cursor:pointer;">Admin</span> <span class="badge-status badge-pending" style="cursor:pointer;">Dispatcher</span> <span class="badge-status badge-pending" style="cursor:pointer;">Accounts</span> <span class="badge-status badge-pending" style="cursor:pointer;">Driver</span> <span class="badge-status badge-pending" style="cursor:pointer;">Manager</span> 
+      <div class="ms-auto d-flex gap-2">
+        <select class="form-select form-select-sm" style="width:auto;font-size:12.5px;">
+          <option>All Status</option>
+          <option>Active</option>
+          <option>Pending</option>
+          <option>Completed</option>
+        </select>
+        <input type="date" class="form-control form-control-sm" style="width:auto;font-size:12.5px;">
+      </div>
+    </div>
+    <div class="panel">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <div class="panel-title mb-0">User Directory</div>
+          <div class="panel-sub mb-0">All system accounts and role assignments</div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="tbl">
+          <thead><tr><th>User</th><th>Role</th><th>Email</th><th>Last Active</th><th>Status</th></tr></thead>
+          <tbody>
+          <tr><td><div class='driver-mini'><div class='av'>SA</div> Sana Akhtar</div></td><td>Administrator</td><td>sana@superittefaq.co.uk</td><td>Today, 10:12 AM</td><td><span class='badge-status badge-delivered'>Active</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>UB</div> Usman Bhatti</div></td><td>Dispatcher</td><td>usman@superittefaq.co.uk</td><td>Today, 9:40 AM</td><td><span class='badge-status badge-delivered'>Active</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>NZ</div> Nadia Zafar</div></td><td>Accounts</td><td>nadia@superittefaq.co.uk</td><td>Yesterday, 5:15 PM</td><td><span class='badge-status badge-delivered'>Active</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>RK</div> Rizwan Khalid</div></td><td>Manager</td><td>rizwan@superittefaq.co.uk</td><td>3 days ago</td><td><span class='badge-status badge-pending'>Suspended</span></td></tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-3" style="font-size:12px;color:var(--muted);">
+        <div>Showing 4 of 16 records</div>
+        <nav>
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><a class="page-link">Prev</a></li>
+            <li class="page-item active"><a class="page-link">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="text-center text-muted mt-4" style="font-size:11.5px;">
+      &copy; 2026 Super Ittefaq Logistics &middot; Transport Management System
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

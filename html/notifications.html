@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications | Super Ittefaq Logistics</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="assets/style.css" rel="stylesheet">
+
+</head>
+<body>
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <img src="logo.png" alt="Super Ittefaq Logistics">
+    <div class="brand">SUPER ITTEFAQ<span>LOGISTICS &amp; TRANSPORT</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard </a>
+    <div class="nav-section-label">Operations</div>
+    <a href="jobs.html" class="nav-link"><i class="bi bi-clipboard2-check"></i> Jobs / Bookings <span class="badge-mini">12</span></a>
+    <a href="dispatch.html" class="nav-link"><i class="bi bi-diagram-3"></i> Planning / Dispatch </a>
+    <a href="trips.html" class="nav-link"><i class="bi bi-signpost-split"></i> Trips </a>
+    <a href="tracking.html" class="nav-link"><i class="bi bi-geo-alt"></i> Live Tracking </a>
+    <a href="pod.html" class="nav-link"><i class="bi bi-file-earmark-check"></i> Proof of Delivery </a>
+    <div class="nav-section-label">Fleet & People</div>
+    <a href="vehicles.html" class="nav-link"><i class="bi bi-truck-front"></i> Vehicles / Fleet </a>
+    <a href="drivers.html" class="nav-link"><i class="bi bi-person-badge"></i> Drivers </a>
+    <a href="maintenance.html" class="nav-link"><i class="bi bi-tools"></i> Maintenance </a>
+    <div class="nav-section-label">Accounts</div>
+    <a href="customers.html" class="nav-link"><i class="bi bi-people"></i> Customers </a>
+    <a href="invoices.html" class="nav-link"><i class="bi bi-receipt"></i> Invoices </a>
+    <a href="expenses.html" class="nav-link"><i class="bi bi-cash-coin"></i> Expenses </a>
+    <div class="nav-section-label">System</div>
+    <a href="documents.html" class="nav-link"><i class="bi bi-folder2-open"></i> Documents <span class="badge-mini">5</span></a>
+    <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> Reports </a>
+    <a href="users.html" class="nav-link"><i class="bi bi-shield-lock"></i> Users & Permissions </a>
+    <a href="notifications.html" class="nav-link active"><i class="bi bi-bell"></i> Notifications </a>
+    <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings </a>
+  </nav>
+  <div class="sidebar-foot">
+    Transport Management System<br>v1.0 &middot; Laravel 11
+  </div>
+</aside>
+<div id="main">
+<div id="topbar">
+    <button class="btn btn-sm d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="search">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Search notifications...">
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="topbar-icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></button>
+      <button class="topbar-icon-btn"><i class="bi bi-envelope"></i></button>
+      <div class="user-chip">
+        <div class="avatar">SI</div>
+        <div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--navy-900);">Admin User</div>
+          <div style="font-size:10.5px;color:var(--muted);">Administrator</div>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:11px;color:var(--muted);"></i>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">System</div>
+        <h1>Notifications</h1>
+        <div class="sub">Email / SMS / WhatsApp alerts & expiry reminders</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-navy"><i class="bi bi-download me-1"></i> Export</button>
+        <button class="btn btn-navy"><i class="bi bi-plus-lg me-1"></i> New Rule</button>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF0FB;color:var(--navy-800);"><i class="bi bi-bell"></i></div>
+          <div class="label">Sent Today</div>
+          <div class="value">64</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> Across all channels</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-envelope-check"></i></div>
+          <div class="label">Email Delivered</div>
+          <div class="value">98%</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> Delivery rate</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-chat-dots"></i></div>
+          <div class="label">SMS Sent</div>
+          <div class="value">22</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> Expiry reminders</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-whatsapp"></i></div>
+          <div class="label">WhatsApp Sent</div>
+          <div class="value">18</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> POD confirmations</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Notification Channels</div>
+      <div class="panel-sub">Choose how alerts are delivered for each event</div>
+      <div class="table-responsive">
+        <table class="tbl">
+          <thead><tr><th>Event</th><th class="text-center">Email</th><th class="text-center">SMS</th><th class="text-center">WhatsApp</th></tr></thead>
+          <tbody>
+            <tr><td>Job assigned to driver</td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox"></td></tr>
+            <tr><td>Delivery completed / POD captured</td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox"></td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td></tr>
+            <tr><td>Document expiry reminder (30 / 14 / 7 days)</td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox"></td></tr>
+            <tr><td>Invoice overdue</td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox"></td><td class="text-center"><input class="form-check-input" type="checkbox"></td></tr>
+            <tr><td>Vehicle maintenance due</td><td class="text-center"><input class="form-check-input" type="checkbox" checked></td><td class="text-center"><input class="form-check-input" type="checkbox"></td><td class="text-center"><input class="form-check-input" type="checkbox"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-navy btn-sm mt-2">Save Preferences</button>
+    </div>
+    <div class="text-center text-muted mt-4" style="font-size:11.5px;">
+      &copy; 2026 Super Ittefaq Logistics &middot; Transport Management System
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

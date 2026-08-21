@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drivers | Super Ittefaq Logistics</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="assets/style.css" rel="stylesheet">
+
+</head>
+<body>
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <img src="logo.png" alt="Super Ittefaq Logistics">
+    <div class="brand">SUPER ITTEFAQ<span>LOGISTICS &amp; TRANSPORT</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard </a>
+    <div class="nav-section-label">Operations</div>
+    <a href="jobs.html" class="nav-link"><i class="bi bi-clipboard2-check"></i> Jobs / Bookings <span class="badge-mini">12</span></a>
+    <a href="dispatch.html" class="nav-link"><i class="bi bi-diagram-3"></i> Planning / Dispatch </a>
+    <a href="trips.html" class="nav-link"><i class="bi bi-signpost-split"></i> Trips </a>
+    <a href="tracking.html" class="nav-link"><i class="bi bi-geo-alt"></i> Live Tracking </a>
+    <a href="pod.html" class="nav-link"><i class="bi bi-file-earmark-check"></i> Proof of Delivery </a>
+    <div class="nav-section-label">Fleet & People</div>
+    <a href="vehicles.html" class="nav-link"><i class="bi bi-truck-front"></i> Vehicles / Fleet </a>
+    <a href="drivers.html" class="nav-link active"><i class="bi bi-person-badge"></i> Drivers </a>
+    <a href="maintenance.html" class="nav-link"><i class="bi bi-tools"></i> Maintenance </a>
+    <div class="nav-section-label">Accounts</div>
+    <a href="customers.html" class="nav-link"><i class="bi bi-people"></i> Customers </a>
+    <a href="invoices.html" class="nav-link"><i class="bi bi-receipt"></i> Invoices </a>
+    <a href="expenses.html" class="nav-link"><i class="bi bi-cash-coin"></i> Expenses </a>
+    <div class="nav-section-label">System</div>
+    <a href="documents.html" class="nav-link"><i class="bi bi-folder2-open"></i> Documents <span class="badge-mini">5</span></a>
+    <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> Reports </a>
+    <a href="users.html" class="nav-link"><i class="bi bi-shield-lock"></i> Users & Permissions </a>
+    <a href="notifications.html" class="nav-link"><i class="bi bi-bell"></i> Notifications </a>
+    <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings </a>
+  </nav>
+  <div class="sidebar-foot">
+    Transport Management System<br>v1.0 &middot; Laravel 11
+  </div>
+</aside>
+<div id="main">
+<div id="topbar">
+    <button class="btn btn-sm d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="search">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Search drivers...">
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="topbar-icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></button>
+      <button class="topbar-icon-btn"><i class="bi bi-envelope"></i></button>
+      <div class="user-chip">
+        <div class="avatar">SI</div>
+        <div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--navy-900);">Admin User</div>
+          <div style="font-size:10.5px;color:var(--muted);">Administrator</div>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:11px;color:var(--muted);"></i>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Fleet & People</div>
+        <h1>Drivers</h1>
+        <div class="sub">Driver profiles, licences, CPC & documents</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-navy"><i class="bi bi-download me-1"></i> Export</button>
+        <button class="btn btn-navy"><i class="bi bi-plus-lg me-1"></i> Add Driver</button>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF0FB;color:var(--navy-800);"><i class="bi bi-person-badge"></i></div>
+          <div class="label">Total Drivers</div>
+          <div class="value">20</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> Full-time & agency</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-check-circle"></i></div>
+          <div class="label">On Duty Today</div>
+          <div class="value">15</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> 5 rest / leave</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-award"></i></div>
+          <div class="label">CPC Due < 30 days</div>
+          <div class="value">3</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> Book training now</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FBE9E7;color:var(--danger);"><i class="bi bi-file-earmark-x"></i></div>
+          <div class="label">Licence Expired</div>
+          <div class="value">1</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> Suspend from rota</div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+      <span class="badge-status badge-pending" style="cursor:pointer;">All</span> <span class="badge-status badge-pending" style="cursor:pointer;">On Duty</span> <span class="badge-status badge-pending" style="cursor:pointer;">On Leave</span> <span class="badge-status badge-pending" style="cursor:pointer;">Suspended</span> 
+      <div class="ms-auto d-flex gap-2">
+        <select class="form-select form-select-sm" style="width:auto;font-size:12.5px;">
+          <option>All Status</option>
+          <option>Active</option>
+          <option>Pending</option>
+          <option>Completed</option>
+        </select>
+        <input type="date" class="form-control form-control-sm" style="width:auto;font-size:12.5px;">
+      </div>
+    </div>
+    <div class="panel">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <div class="panel-title mb-0">Driver Roster</div>
+          <div class="panel-sub mb-0">All employed and agency drivers</div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="tbl">
+          <thead><tr><th>Driver</th><th>Licence No</th><th>Category</th><th>CPC Expiry</th><th>Phone</th><th>Status</th></tr></thead>
+          <tbody>
+          <tr><td><div class='driver-mini'><div class='av'>AK</div> Ahsan Khan</div></td><td><span class='mono'>AKHAN805112</span></td><td>Cat C+E</td><td>24 Aug 2026</td><td>07911 223344</td><td><span class='badge-status badge-transit'>On Trip</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>MR</div> M. Rafiq</div></td><td><span class='mono'>RAFIQ701229</span></td><td>Cat C</td><td>12 Feb 2027</td><td>07922 556677</td><td><span class='badge-status badge-delivered'>On Duty</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>SI</div> S. Iqbal</div></td><td><span class='mono'>SIQBAL650301</span></td><td>Cat C+E</td><td>30 Aug 2026</td><td>07933 889900</td><td><span class='badge-status badge-transit'>On Trip</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>TA</div> T. Ali</div></td><td><span class='mono'>TALI900117</span></td><td>Cat C</td><td>05 Jan 2027</td><td>07944 112233</td><td><span class='badge-status badge-pending'>On Leave</span></td></tr>
+<tr><td><div class='driver-mini'><div class='av'>FH</div> F. Hussain</div></td><td><span class='mono'>FHUSS730622</span></td><td>Cat B</td><td>01 May 2026</td><td>07955 445566</td><td><span class='badge-status badge-delayed'>Licence Expired</span></td></tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-3" style="font-size:12px;color:var(--muted);">
+        <div>Showing 5 of 20 records</div>
+        <nav>
+          <ul class="pagination pagination-sm mb-0">
+            <li class="page-item disabled"><a class="page-link">Prev</a></li>
+            <li class="page-item active"><a class="page-link">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="text-center text-muted mt-4" style="font-size:11.5px;">
+      &copy; 2026 Super Ittefaq Logistics &middot; Transport Management System
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Tracking | Super Ittefaq Logistics</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="assets/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+#map{height:520px;width:100%;border-radius:14px;z-index:1;}
+.leaflet-popup-content-wrapper{border-radius:10px;}
+.leaflet-popup-content{font-family:'Inter',sans-serif;font-size:12.5px;margin:10px 12px;}
+.leaflet-popup-content b{font-family:'Poppins',sans-serif;font-size:13px;color:#1B2A4A;}
+.truck-pin{
+  width:30px;height:30px;border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.35);
+  border:2px solid #fff;
+}
+.truck-pin i{transform:rotate(45deg);color:#fff;font-size:14px;}
+.veh-row{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 8px; border-radius:10px; cursor:pointer;
+  border:1px solid transparent;
+}
+.veh-row:hover{background:#FAFBFD;border-color:var(--line);}
+.veh-row.active-row{background:#EAF0FB;border-color:#C9D6EE;}
+.veh-row .dot-live{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.veh-row .v1{font-size:13px;font-weight:700;color:var(--navy-900);}
+.veh-row .v2{font-size:11px;color:var(--muted);}
+.veh-row .speed{margin-left:auto;font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;color:var(--navy-800);text-align:right;}
+.legend-chip{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);}
+.legend-chip .sw{width:10px;height:10px;border-radius:50%;}
+</style>
+</head>
+<body>
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <img src="logo.png" alt="Super Ittefaq Logistics">
+    <div class="brand">SUPER ITTEFAQ<span>LOGISTICS &amp; TRANSPORT</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard </a>
+    <div class="nav-section-label">Operations</div>
+    <a href="jobs.html" class="nav-link"><i class="bi bi-clipboard2-check"></i> Jobs / Bookings <span class="badge-mini">12</span></a>
+    <a href="dispatch.html" class="nav-link"><i class="bi bi-diagram-3"></i> Planning / Dispatch </a>
+    <a href="trips.html" class="nav-link"><i class="bi bi-signpost-split"></i> Trips </a>
+    <a href="tracking.html" class="nav-link active"><i class="bi bi-geo-alt"></i> Live Tracking </a>
+    <a href="pod.html" class="nav-link"><i class="bi bi-file-earmark-check"></i> Proof of Delivery </a>
+    <div class="nav-section-label">Fleet & People</div>
+    <a href="vehicles.html" class="nav-link"><i class="bi bi-truck-front"></i> Vehicles / Fleet </a>
+    <a href="drivers.html" class="nav-link"><i class="bi bi-person-badge"></i> Drivers </a>
+    <a href="maintenance.html" class="nav-link"><i class="bi bi-tools"></i> Maintenance </a>
+    <div class="nav-section-label">Accounts</div>
+    <a href="customers.html" class="nav-link"><i class="bi bi-people"></i> Customers </a>
+    <a href="invoices.html" class="nav-link"><i class="bi bi-receipt"></i> Invoices </a>
+    <a href="expenses.html" class="nav-link"><i class="bi bi-cash-coin"></i> Expenses </a>
+    <div class="nav-section-label">System</div>
+    <a href="documents.html" class="nav-link"><i class="bi bi-folder2-open"></i> Documents <span class="badge-mini">5</span></a>
+    <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> Reports </a>
+    <a href="users.html" class="nav-link"><i class="bi bi-shield-lock"></i> Users & Permissions </a>
+    <a href="notifications.html" class="nav-link"><i class="bi bi-bell"></i> Notifications </a>
+    <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings </a>
+  </nav>
+  <div class="sidebar-foot">
+    Transport Management System<br>v1.0 &middot; Laravel 11
+  </div>
+</aside>
+<div id="main">
+<div id="topbar">
+    <button class="btn btn-sm d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="search">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Search live tracking...">
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="topbar-icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></button>
+      <button class="topbar-icon-btn"><i class="bi bi-envelope"></i></button>
+      <div class="user-chip">
+        <div class="avatar">SI</div>
+        <div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--navy-900);">Admin User</div>
+          <div style="font-size:10.5px;color:var(--muted);">Administrator</div>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:11px;color:var(--muted);"></i>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Operations</div>
+        <h1>Live Tracking</h1>
+        <div class="sub">Real-time GPS tracking, routes & geofence alerts</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-navy"><i class="bi bi-download me-1"></i> Export</button>
+        <button class="btn btn-navy"><i class="bi bi-plus-lg me-1"></i> Refresh</button>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF0FB;color:var(--navy-800);"><i class="bi bi-truck-front"></i></div>
+          <div class="label">Vehicles Tracked</div>
+          <div class="value">22</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> All fleet online</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-broadcast"></i></div>
+          <div class="label">Moving</div>
+          <div class="value">14</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> Currently en route</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-pause-circle"></i></div>
+          <div class="label">Idle</div>
+          <div class="value">6</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> At depot / loading</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FBE9E7;color:var(--danger);"><i class="bi bi-wifi-off"></i></div>
+          <div class="label">Signal Lost</div>
+          <div class="value">2</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> Check device connection</div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col-lg-8">
+        <div class="panel" style="padding:16px;">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+              <div class="panel-title mb-0">Live Fleet Map</div>
+              <div class="panel-sub mb-0">Real-time vehicle positions &middot; updates every 30s</div>
+            </div>
+            <div class="d-flex gap-3">
+              <span class="legend-chip"><span class="sw" style="background:#2E7D5B;"></span> Moving</span>
+              <span class="legend-chip"><span class="sw" style="background:#C9822A;"></span> Delayed</span>
+              <span class="legend-chip"><span class="sw" style="background:#6B7688;"></span> Idle</span>
+              <span class="legend-chip"><span class="sw" style="background:#C0392B;"></span> Signal Lost</span>
+            </div>
+          </div>
+          <div id="map"></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="panel h-100" style="padding:16px;">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <div class="panel-title mb-0">Vehicles</div>
+            <span class="badge-status badge-delivered" id="liveCount">22 online</span>
+          </div>
+          <div class="panel-sub mb-1">Click a vehicle to focus it on the map</div>
+          <div id="vehList" style="max-height:440px;overflow-y:auto;"></div>
+        </div>
+      </div>
+    </div>
+<div class="row g-3">
+      <div class="col-lg-6">
+        <div class="panel">
+          <div class="panel-title">Active Route &middot; JOB-1042</div>
+          <div class="panel-sub">LP19 XKT &middot; Ahsan Khan &middot; Manchester &rarr; Leeds</div>
+          <div class="route-strip" style="margin-top:14px;">
+            <div class="route-node done"><div class="line"></div><div class="dot"></div><div class="r-label" style="color:var(--navy-900);">Manchester</div><div class="r-count" style="font-size:12px;color:var(--muted);">09:10 AM</div></div>
+            <div class="route-node active"><div class="line"></div><div class="dot"></div><div class="r-label" style="color:var(--navy-900);">A1(M) J34</div><div class="r-count" style="font-size:12px;color:var(--muted);">Now &middot; 58 mph</div></div>
+            <div class="route-node"><div class="line"></div><div class="dot"></div><div class="r-label" style="color:var(--navy-900);">Leeds</div><div class="r-count" style="font-size:12px;color:var(--muted);">ETA 2:40 PM</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="panel">
+          <div class="panel-title">Geofence &amp; Alerts</div>
+          <div class="panel-sub">Automatic events from vehicle telematics</div>
+          <div class="expiry-item"><div class="ico" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-geo"></i></div><div class="txt"><div class="t1">LR68 DJP entered Bristol Depot</div><div class="t2">Geofence arrival</div></div><span class="when" style="background:#EDEFF5;color:var(--muted);">10 min ago</span></div>
+          <div class="expiry-item"><div class="ico" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-speedometer2"></i></div><div class="txt"><div class="t1">LX21 GHT speeding on M3</div><div class="t2">72 mph in 60 mph zone</div></div><span class="when" style="background:#FFF3E0;color:var(--warn);">24 min ago</span></div>
+          <div class="expiry-item"><div class="ico" style="background:#FBE9E7;color:var(--danger);"><i class="bi bi-wifi-off"></i></div><div class="txt"><div class="t1">LT70 BWS lost GPS signal</div><div class="t2">In workshop, device offline</div></div><span class="when" style="background:#FBE9E7;color:var(--danger);">1 hr ago</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center text-muted mt-4" style="font-size:11.5px;">
+      &copy; 2026 Super Ittefaq Logistics &middot; Transport Management System
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+const vehicles = [
+  {reg:'LP19 XKT', driver:'Ahsan Khan', status:'moving', lat:53.930, lng:-1.381, loc:'A1(M), Junction 34', speed:'58 mph', color:'#2E7D5B'},
+  {reg:'LX21 GHT', driver:'S. Iqbal', status:'delayed', lat:51.060, lng:-1.400, loc:'M3, near Southampton', speed:'22 mph', color:'#C9822A'},
+  {reg:'LR68 DJP', driver:'M. Rafiq', status:'idle', lat:51.450, lng:-2.580, loc:'Depot, Bristol', speed:'0 mph', color:'#6B7688'},
+  {reg:'LT70 BWS', driver:'Workshop', status:'offline', lat:53.800, lng:-1.549, loc:'Workshop, Leeds', speed:'&mdash;', color:'#C0392B'},
+  {reg:'LM17 CNP', driver:'F. Hussain', status:'idle', lat:55.953, lng:-3.188, loc:'Depot, Edinburgh', speed:'0 mph', color:'#6B7688'},
+  {reg:'LN08 PVX', driver:'T. Ali', status:'moving', lat:52.486, lng:-1.890, loc:'M6, near Birmingham', speed:'61 mph', color:'#2E7D5B'},
+];
+
+const map = L.map('map', {scrollWheelZoom:false}).setView([53.6, -1.8], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+function truckIcon(color){
+  return L.divIcon({
+    className: '',
+    html: `<div class="truck-pin" style="background:${color};"><i class="bi bi-truck-front"></i></div>`,
+    iconSize: [30,30],
+    iconAnchor: [15,28],
+    popupAnchor: [0,-26]
+  });
+}
+
+const markers = {};
+vehicles.forEach(v => {
+  const m = L.marker([v.lat, v.lng], {icon: truckIcon(v.color)}).addTo(map);
+  m.bindPopup(`<b>${v.reg}</b><br>${v.driver}<br>${v.loc}<br>Speed: ${v.speed}`);
+  markers[v.reg] = m;
+});
+
+// Route polyline for active job
+const route = [[53.483,-2.244],[53.70,-1.90],[53.930,-1.381],[53.80,-1.549]];
+L.polyline(route, {color:'#D4A537', weight:4, opacity:.85, dashArray:'1,8'}).addTo(map);
+
+// Vehicle list panel
+const statusLabel = {moving:'Moving', delayed:'Delayed', idle:'Idle', offline:'Signal Lost'};
+const listEl = document.getElementById('vehList');
+vehicles.forEach(v => {
+  const row = document.createElement('div');
+  row.className = 'veh-row';
+  row.innerHTML = `
+    <span class="dot-live" style="background:${v.color};"></span>
+    <div>
+      <div class="v1">${v.reg}</div>
+      <div class="v2">${v.driver} &middot; ${v.loc}</div>
+    </div>
+    <div class="speed">${v.speed}<br><span style="font-weight:500;color:var(--muted);font-size:10.5px;">${statusLabel[v.status]}</span></div>`;
+  row.onclick = () => {
+    map.flyTo([v.lat, v.lng], 12, {duration: .8});
+    markers[v.reg].openPopup();
+    document.querySelectorAll('.veh-row').forEach(r => r.classList.remove('active-row'));
+    row.classList.add('active-row');
+  };
+  listEl.appendChild(row);
+});
+
+document.getElementById('liveCount').textContent = vehicles.length + ' online';
+</script>
+</body>
+</html>

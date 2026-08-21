@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | Super Ittefaq Logistics</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="assets/style.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<aside id="sidebar">
+  <div class="sidebar-brand">
+    <img src="logo.png" alt="Super Ittefaq Logistics">
+    <div class="brand">SUPER ITTEFAQ<span>LOGISTICS &amp; TRANSPORT</span></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Overview</div>
+    <a href="index.html" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard </a>
+    <div class="nav-section-label">Operations</div>
+    <a href="jobs.html" class="nav-link"><i class="bi bi-clipboard2-check"></i> Jobs / Bookings <span class="badge-mini">12</span></a>
+    <a href="dispatch.html" class="nav-link"><i class="bi bi-diagram-3"></i> Planning / Dispatch </a>
+    <a href="trips.html" class="nav-link"><i class="bi bi-signpost-split"></i> Trips </a>
+    <a href="tracking.html" class="nav-link"><i class="bi bi-geo-alt"></i> Live Tracking </a>
+    <a href="pod.html" class="nav-link"><i class="bi bi-file-earmark-check"></i> Proof of Delivery </a>
+    <div class="nav-section-label">Fleet & People</div>
+    <a href="vehicles.html" class="nav-link"><i class="bi bi-truck-front"></i> Vehicles / Fleet </a>
+    <a href="drivers.html" class="nav-link"><i class="bi bi-person-badge"></i> Drivers </a>
+    <a href="maintenance.html" class="nav-link"><i class="bi bi-tools"></i> Maintenance </a>
+    <div class="nav-section-label">Accounts</div>
+    <a href="customers.html" class="nav-link"><i class="bi bi-people"></i> Customers </a>
+    <a href="invoices.html" class="nav-link"><i class="bi bi-receipt"></i> Invoices </a>
+    <a href="expenses.html" class="nav-link"><i class="bi bi-cash-coin"></i> Expenses </a>
+    <div class="nav-section-label">System</div>
+    <a href="documents.html" class="nav-link"><i class="bi bi-folder2-open"></i> Documents <span class="badge-mini">5</span></a>
+    <a href="reports.html" class="nav-link"><i class="bi bi-bar-chart-line"></i> Reports </a>
+    <a href="users.html" class="nav-link"><i class="bi bi-shield-lock"></i> Users & Permissions </a>
+    <a href="notifications.html" class="nav-link"><i class="bi bi-bell"></i> Notifications </a>
+    <a href="settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings </a>
+  </nav>
+  <div class="sidebar-foot">
+    Transport Management System<br>v1.0 &middot; Laravel 11
+  </div>
+</aside>
+<div id="main">
+<div id="topbar">
+    <button class="btn btn-sm d-lg-none" onclick="document.getElementById('sidebar').classList.toggle('show')">
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    <div class="search">
+      <i class="bi bi-search"></i>
+      <input type="text" placeholder="Search job #, vehicle, driver, customer...">
+    </div>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <button class="topbar-icon-btn"><i class="bi bi-bell"></i><span class="dot"></span></button>
+      <button class="topbar-icon-btn"><i class="bi bi-envelope"></i></button>
+      <div class="user-chip">
+        <div class="avatar">SI</div>
+        <div>
+          <div style="font-size:12.5px;font-weight:700;color:var(--navy-900);">Admin User</div>
+          <div style="font-size:10.5px;color:var(--muted);">Administrator</div>
+        </div>
+        <i class="bi bi-chevron-down" style="font-size:11px;color:var(--muted);"></i>
+      </div>
+    </div>
+  </div>
+  <div class="page-wrap">
+
+
+    <!-- Page head -->
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Wednesday, 19 August 2026</div>
+        <h1>Operations Dashboard</h1>
+        <div class="sub">Fleet, drivers, jobs and revenue at a glance</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-navy"><i class="bi bi-download me-1"></i> Export Report</button>
+        <button class="btn btn-navy"><i class="bi bi-plus-lg me-1"></i> New Job / Booking</button>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF0FB;color:var(--navy-800);"><i class="bi bi-signpost-split"></i></div>
+          <div class="label">Active Trips</div>
+          <div class="value">24</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> 6 in transit today</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#EAF7EF;color:var(--success);"><i class="bi bi-truck-front"></i></div>
+          <div class="label">Vehicles Available</div>
+          <div class="value">18 / 22</div>
+          <div class="delta down"><i class="bi bi-arrow-down-short"></i> 3 in maintenance</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-person-badge"></i></div>
+          <div class="label">Drivers On Duty</div>
+          <div class="value">15 / 20</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> 2 on leave</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-card">
+          <div class="icon-badge" style="background:#F3E3B8;color:#8A6512;"><i class="bi bi-cash-stack"></i></div>
+          <div class="label">Revenue (MTD)</div>
+          <div class="value mono">£48,260</div>
+          <div class="delta up"><i class="bi bi-arrow-up-short"></i> 12% vs last month</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Route strip (signature) + Revenue chart -->
+    <div class="row g-3 mb-3">
+      <div class="col-lg-7">
+        <div class="route-card h-100">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <div class="eyebrow" style="color:var(--gold);">Today's Pipeline</div>
+              <h3 class="mb-0" style="font-size:16px;font-weight:700;">Job Flow &middot; Pickup to Delivery</h3>
+            </div>
+            <span class="badge-status badge-pending" style="background:rgba(255,255,255,.1);color:#fff;">32 jobs today</span>
+          </div>
+
+          <div class="route-strip">
+            <div class="route-node done">
+              <div class="line"></div>
+              <div class="dot"></div>
+              <div class="r-count">32</div>
+              <div class="r-label">Booked</div>
+            </div>
+            <div class="route-node done">
+              <div class="line"></div>
+              <div class="dot"></div>
+              <div class="r-count">29</div>
+              <div class="r-label">Assigned</div>
+            </div>
+            <div class="route-node active">
+              <div class="line"></div>
+              <div class="dot"></div>
+              <div class="r-count">14</div>
+              <div class="r-label">In Transit</div>
+            </div>
+            <div class="route-node">
+              <div class="line"></div>
+              <div class="dot"></div>
+              <div class="r-count">18</div>
+              <div class="r-label">Delivered</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="panel h-100">
+          <div class="panel-title">Revenue vs Expenses</div>
+          <div class="panel-sub">Last 6 months</div>
+          <canvas id="revenueChart" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent trips + expiry alerts -->
+    <div class="row g-3 mb-3">
+      <div class="col-lg-8">
+        <div class="panel">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <div>
+              <div class="panel-title mb-0">Recent Trips</div>
+              <div class="panel-sub mb-0">Latest pickup &amp; delivery activity</div>
+            </div>
+            <a href="#" class="btn btn-outline-navy btn-sm">View all</a>
+          </div>
+          <div class="table-responsive">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Job #</th>
+                  <th>Customer</th>
+                  <th>Route</th>
+                  <th>Driver</th>
+                  <th>Vehicle</th>
+                  <th>Status</th>
+                  <th class="text-end">ETA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono fw-semibold">JOB-1042</td>
+                  <td>Nexus Retail Ltd</td>
+                  <td>Manchester &rarr; Leeds</td>
+                  <td><div class="driver-mini"><div class="av">AK</div> Ahsan Khan</div></td>
+                  <td class="mono">LP19 XKT</td>
+                  <td><span class="badge-status badge-transit">In Transit</span></td>
+                  <td class="text-end mono">2:40 PM</td>
+                </tr>
+                <tr>
+                  <td class="mono fw-semibold">JOB-1041</td>
+                  <td>BuildCo Supplies</td>
+                  <td>Birmingham &rarr; Bristol</td>
+                  <td><div class="driver-mini"><div class="av">MR</div> M. Rafiq</div></td>
+                  <td class="mono">LR68 DJP</td>
+                  <td><span class="badge-status badge-delivered">Delivered</span></td>
+                  <td class="text-end mono">11:05 AM</td>
+                </tr>
+                <tr>
+                  <td class="mono fw-semibold">JOB-1040</td>
+                  <td>FreshMart Foods</td>
+                  <td>London &rarr; Southampton</td>
+                  <td><div class="driver-mini"><div class="av">SI</div> S. Iqbal</div></td>
+                  <td class="mono">LX21 GHT</td>
+                  <td><span class="badge-status badge-delayed">Delayed</span></td>
+                  <td class="text-end mono">4:15 PM</td>
+                </tr>
+                <tr>
+                  <td class="mono fw-semibold">JOB-1039</td>
+                  <td>Nova Electronics</td>
+                  <td>Leeds &rarr; Newcastle</td>
+                  <td><div class="driver-mini"><div class="av">TA</div> T. Ali</div></td>
+                  <td class="mono">LT70 BWS</td>
+                  <td><span class="badge-status badge-pending">Pending Dispatch</span></td>
+                  <td class="text-end mono">&mdash;</td>
+                </tr>
+                <tr>
+                  <td class="mono fw-semibold">JOB-1038</td>
+                  <td>Harborview Ltd</td>
+                  <td>Glasgow &rarr; Edinburgh</td>
+                  <td><div class="driver-mini"><div class="av">FH</div> F. Hussain</div></td>
+                  <td class="mono">LM17 CNP</td>
+                  <td><span class="badge-status badge-delivered">Delivered</span></td>
+                  <td class="text-end mono">9:20 AM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="panel h-100">
+          <div class="panel-title">Expiring Soon</div>
+          <div class="panel-sub">Documents, MOT &amp; insurance</div>
+
+          <div class="expiry-item">
+            <div class="ico" style="background:#FBE9E7;color:var(--danger);"><i class="bi bi-file-earmark-x"></i></div>
+            <div class="txt">
+              <div class="t1">MOT &mdash; LP19 XKT</div>
+              <div class="t2">Vehicle document</div>
+            </div>
+            <span class="when" style="background:#FBE9E7;color:var(--danger);">2 days</span>
+          </div>
+          <div class="expiry-item">
+            <div class="ico" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-person-vcard"></i></div>
+            <div class="txt">
+              <div class="t1">CPC &mdash; Ahsan Khan</div>
+              <div class="t2">Driver qualification</div>
+            </div>
+            <span class="when" style="background:#FFF3E0;color:var(--warn);">6 days</span>
+          </div>
+          <div class="expiry-item">
+            <div class="ico" style="background:#FFF3E0;color:var(--warn);"><i class="bi bi-shield-check"></i></div>
+            <div class="txt">
+              <div class="t1">Insurance &mdash; LR68 DJP</div>
+              <div class="t2">Vehicle document</div>
+            </div>
+            <span class="when" style="background:#FFF3E0;color:var(--warn);">9 days</span>
+          </div>
+          <div class="expiry-item">
+            <div class="ico" style="background:#EDEFF5;color:var(--muted);"><i class="bi bi-card-checklist"></i></div>
+            <div class="txt">
+              <div class="t1">Licence &mdash; S. Iqbal</div>
+              <div class="t2">Driver document</div>
+            </div>
+            <span class="when" style="background:#EDEFF5;color:var(--muted);">14 days</span>
+          </div>
+          <div class="expiry-item">
+            <div class="ico" style="background:#EDEFF5;color:var(--muted);"><i class="bi bi-tools"></i></div>
+            <div class="txt">
+              <div class="t1">Service due &mdash; LT70 BWS</div>
+              <div class="t2">Scheduled maintenance</div>
+            </div>
+            <span class="when" style="background:#EDEFF5;color:var(--muted);">18 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modules overview -->
+    <div class="panel mb-3">
+      <div class="panel-title">All Modules</div>
+      <div class="panel-sub">Every part of the transport management system</div>
+      <div class="row g-3">
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-people"></i></div><div><div class="t1">Customers</div><div class="t2">Profiles, contacts, addresses, credit &amp; payment history</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-truck-front"></i></div><div><div class="t1">Vehicles / Fleet</div><div class="t2">Registration, MOT, insurance &amp; service records</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-person-badge"></i></div><div><div class="t1">Drivers</div><div class="t2">Licence, CPC, documents &amp; expiry dates</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-clipboard2-check"></i></div><div><div class="t1">Jobs / Bookings</div><div class="t2">Create customer transport requests</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-diagram-3"></i></div><div><div class="t1">Planning / Dispatch</div><div class="t2">Assign jobs to vehicle &amp; driver</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-signpost-split"></i></div><div><div class="t1">Trips</div><div class="t2">Pickup &rarr; Transit &rarr; Delivery tracking</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-file-earmark-check"></i></div><div><div class="t1">Proof of Delivery</div><div class="t2">Signature, photo, delivery time</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-geo-alt"></i></div><div><div class="t1">Tracking</div><div class="t2">Vehicle GPS, location &amp; status</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-receipt"></i></div><div><div class="t1">Invoices</div><div class="t2">Customer invoices, VAT &amp; payment status</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-cash-coin"></i></div><div><div class="t1">Expenses</div><div class="t2">Fuel, tolls, parking, repairs</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-tools"></i></div><div><div class="t1">Maintenance</div><div class="t2">Service, repairs, MOT, inspections</div></div></div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+          <div class="module-tile"><div class="ico"><i class="bi bi-bar-chart-line"></i></div><div><div class="t1">Reports</div><div class="t2">Revenue, profit, mileage &amp; performance</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-muted" style="font-size:11.5px;">
+      &copy; 2026 Super Ittefaq Logistics &middot; Transport Management System
+    </div>
+
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+const ctx = document.getElementById('revenueChart');
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Mar','Apr','May','Jun','Jul','Aug'],
+    datasets: [
+      { label: 'Revenue', data: [32000, 35500, 41000, 39500, 44000, 48260], backgroundColor: '#1B2A4A', borderRadius: 6, maxBarThickness: 22 },
+      { label: 'Expenses', data: [21000, 22500, 24000, 23500, 25500, 27000], backgroundColor: '#D4A537', borderRadius: 6, maxBarThickness: 22 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 11 } } } },
+    scales: {
+      y: { grid: { color: '#EEF1F6' }, ticks: { font: { size: 10 } } },
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    }
+  }
+});
+</script>
+</body>
+</html>
